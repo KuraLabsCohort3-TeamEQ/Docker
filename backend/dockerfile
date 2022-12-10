@@ -1,0 +1,11 @@
+FROM --platform=arm64 postgres:9.6-alpine
+
+WORKDIR /app
+
+COPY . .
+
+ENV POSTGRES_PASSWORD=password
+VOLUME [ "postgres_volume:/var/lib/postgresql/data" ]
+EXPOSE 5432
+
+ENTRYPOINT [ "rake db:create db:migrate db:seed" ]
